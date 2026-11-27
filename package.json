@@ -1,0 +1,35 @@
+{
+  "name": "task-router",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "vite build && node server/main.ts",
+    "dev:server": "node --watch server/main.ts",
+    "dev:web": "vite",
+    "test": "node --test --test-timeout=60000 \"test/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test && vite build",
+    "reset": "node server/reset.ts",
+    "stress": "node scripts/stress.ts",
+    "bench": "node scripts/bench.ts",
+    "import": "node server/import.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.14.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.4",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "~5.9",
+    "vite": "^8.4.0"
+  },
+  "description": "Task routing across branches: durable queueing, explainable delegation, and an assistant that diagnoses stuck work."
+}
