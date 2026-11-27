@@ -25,7 +25,7 @@ infrastructure to install.
 ### System
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph Browser
     OC["Operator console<br/>tasks · projects · people · assistant"]
     PW["Personal workspace<br/>my work · requests"]
