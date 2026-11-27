@@ -213,18 +213,33 @@ npm install
 ```
 
 ```bash
-npm run import -- organisation.json
-```
-
-```bash
 npm start
 ```
 
 Open `http://127.0.0.1:3001`.
 
+On first start an empty database is filled with a small starting set: six contributors with
+placeholder names and seven tasks that show routine work, a declined offer, an unanswered
+routing request and a task nobody can take.
+
 ### Your organisation file
 
-The system starts empty. People are loaded from a JSON file that you provide:
+To use your own people instead, delete any local data, load a JSON file, then start with
+`SEED=off`:
+
+```bash
+npm run reset
+```
+
+```bash
+npm run import -- organisation.json
+```
+
+```bash
+SEED=off npm start
+```
+
+The file format:
 
 ```text
 {
@@ -280,6 +295,7 @@ contributor's response.
 | `PORT` | `3001` | HTTP port, bound to localhost |
 | `DB_PATH` | `data/app.db` | SQLite file. Several instances may share it |
 | `ROUTING_TIME_SCALE` | `1` | Compresses simulated engine timing, for testing |
+| `SEED` | on | `off` starts an empty database without the starting set |
 | `ASSISTANT_MODEL` | off | `on` lets a language model answer questions about cases. Uses the Anthropic API and its standard credentials. See [the assistant](docs/ASSISTANT.md#optional-language-model) |
 
 ```bash
@@ -307,7 +323,7 @@ deletes all local data. Stop the server first. For development, run `npm run dev
 npm run check
 ```
 
-Type check, 124 tests and a production build. The tests cover the lifecycle, race conditions,
+Type check, 126 tests and a production build. The tests cover the lifecycle, race conditions,
 restarts, queue failures, a full disk, permissions, planning, scoring, the assistant and its
 safeguards.
 

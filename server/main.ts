@@ -6,11 +6,13 @@ import { createApp } from './api.ts';
 import { DB_PATH, DIST_DIR, PORT, TIME_SCALE } from './config.ts';
 import { openDatabase } from './db.ts';
 import { RoutingEngine } from './engine.ts';
+import { seedIfEmpty } from './seed.ts';
 import { Requests } from './requests.ts';
 import { OVERDUE_AFTER_MS, TaskService } from './service.ts';
 import { startWorker } from './worker.ts';
 
 const db = openDatabase(DB_PATH);
+if (process.env.SEED !== 'off') seedIfEmpty(db);
 const service = new TaskService(db, new RoutingEngine(db, Math.random, TIME_SCALE), {
   overdueAfterMs: OVERDUE_AFTER_MS * TIME_SCALE,
 });
